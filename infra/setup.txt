@@ -1,0 +1,4 @@
+# Infrastructure Setup Notes
+
+- This folder contains infrastructure-related files (Terraform, Ansible, etc.)
+- Add scripts/configs here as the project evolves.

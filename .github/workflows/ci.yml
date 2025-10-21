@@ -1,19 +1,31 @@
-name: CI Pipeline
+name: CI Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Step
-      run: echo "🛠️ Simulated build step"
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
 
-    - name: Test Step
-      run: echo "✅ All tests passed"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest streamlit
+
+    - name: Run tests
+      run: |
+        pytest _test.py
